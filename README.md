@@ -26,3 +26,9 @@ the output is dictionary list of both
 conversion is done with to respect to structured records
 did a sanity test on model
 
+model answers are read line by line extra spaces are trimmed, if line is empty skip it go ahead all this is happening in the output of the model also checking the colons in the sentencesm in this parse_lines() if we could not get speaker name than default name is character1, so all this is happening before fine tuning, in rows list only saved and new answers are stored, and in done list sequence ids whose work is already done these are actually sets so tehy will store unique values only, 
+advantage is just basically  that if colab disconnects i know which sequences are done and which are not; first i take 20 development sequences, result is stored in pages, if the error is in the model the sid tells us which sequence exactly has the problem, sequence id and its 3 pages are recorded and stored in rows than we just convert all this into jsonl format
+this code actually rewrites the whole sequence in rows after 1 sequence is completed, but this is inefficient for big files
+in error handling loop stops and the sequence id which had error is shown so the empty output is not saved, 
+
+now we have the answers so now we compare the model answers with the actual answers, first 20 dev sequences IDs is erupted out, path of the file with correct answers is made, selected sequence id and for its correct answers the reference file is made, 
