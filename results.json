@@ -1,0 +1,99 @@
+{
+  "base_model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "training": {
+    "epochs": 1,
+    "lr": 0.0002,
+    "grad_accum": 8,
+    "train_sequences": 60,
+    "train_pages": 180,
+    "val_sequences": 20,
+    "skipped_examples": 1,
+    "final_avg_loss": 0.239,
+    "minutes": 21
+  },
+  "image_max_pixels": 1019200,
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens_baseline": 400,
+    "max_new_tokens_finetuned": 500
+  },
+  "scores_first20_dev": {
+    "baseline": {
+      "text_order_score": 0.4884733190749461,
+      "balanced_joint_f1": 0.1537427325444578,
+      "speaker_accuracy_on_matched": 0.5111491424030591,
+      "joint_f1": 0.301248645122831,
+      "matched_token_coverage": 0.6180452675232402
+    },
+    "finetuned": {
+      "text_order_score": 0.6645035695467771,
+      "balanced_joint_f1": 0.16745484806612915,
+      "speaker_accuracy_on_matched": 0.39864135180216714,
+      "joint_f1": 0.30358831556409493,
+      "matched_token_coverage": 0.7590973866584486
+    },
+    "speaker_limit_sweep": {
+      "post_none": {
+        "text_order_score": 0.6645035695467771,
+        "balanced_joint_f1": 0.16745484806612915,
+        "speaker_accuracy_on_matched": 0.39864135180216714,
+        "joint_f1": 0.30358831556409493,
+        "matched_token_coverage": 0.7590973866584486
+      },
+      "post_K1": {
+        "text_order_score": 0.6645035695467771,
+        "balanced_joint_f1": 0.18950959018643973,
+        "speaker_accuracy_on_matched": 0.5121671852491765,
+        "joint_f1": 0.4047649818623863,
+        "matched_token_coverage": 0.7590973866584486
+      },
+      "post_K2": {
+        "text_order_score": 0.6645035695467771,
+        "balanced_joint_f1": 0.279497971708428,
+        "speaker_accuracy_on_matched": 0.5516781430080725,
+        "joint_f1": 0.4287462767275493,
+        "matched_token_coverage": 0.7590973866584486
+      },
+      "post_K3": {
+        "text_order_score": 0.6645035695467771,
+        "balanced_joint_f1": 0.24425330071787382,
+        "speaker_accuracy_on_matched": 0.5038582599784179,
+        "joint_f1": 0.38675747968777274,
+        "matched_token_coverage": 0.7590973866584486
+      },
+      "post_K4": {
+        "text_order_score": 0.6645035695467771,
+        "balanced_joint_f1": 0.2229985813224707,
+        "speaker_accuracy_on_matched": 0.4620187278940763,
+        "joint_f1": 0.35446643425342106,
+        "matched_token_coverage": 0.7590973866584486
+      },
+      "post_K5": {
+        "text_order_score": 0.6645035695467771,
+        "balanced_joint_f1": 0.21678688814352243,
+        "speaker_accuracy_on_matched": 0.456621998285876,
+        "joint_f1": 0.34873525189492804,
+        "matched_token_coverage": 0.7590973866584486
+      },
+      "post_K8": {
+        "text_order_score": 0.6645035695467771,
+        "balanced_joint_f1": 0.1846027914270783,
+        "speaker_accuracy_on_matched": 0.41766094402726617,
+        "joint_f1": 0.31680595207330475,
+        "matched_token_coverage": 0.7590973866584486
+      }
+    }
+  },
+  "chosen_K": 2
+}
