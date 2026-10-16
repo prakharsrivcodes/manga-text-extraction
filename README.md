@@ -32,3 +32,35 @@ this code actually rewrites the whole sequence in rows after 1 sequence is compl
 in error handling loop stops and the sequence id which had error is shown so the empty output is not saved, 
 
 now we have the answers so now we compare the model answers with the actual answers, first 20 dev sequences IDs is erupted out, path of the file with correct answers is made, selected sequence id and for its correct answers the reference file is made, 
+
+as now we have the answers we check the model answers with the correct answers, a notebook which has all the correct ans, json line converted to dictionary first, got the sequence than got the model pages, first 3 sequences were checked means total 9 pages,, GOLD refer to answers of dataset PRED is the answers of the model , 
+
+in next cell now model ans were pasted in dictionary, no of speakers in a sequence was figured out, g has speakers of the correct answers while the p has speakers which model predicted
+to_target function now does what is it makes
+[
+    {"speaker": "character1", "text": "Hello!"},
+    {"speaker": "character2", "text": "Hi!"}
+] to
+character1: Hello!
+character2: Hi! format
+
+for every images its correct answer was matched
+now we hypertune our qwen model, peft library trains model in less memory, gc cleans memory, LoRA training is done it simply means whole model is not trained but a lil part of model is trained so it uses less memory, LoRA setting are trained its alpha or effect strongness, target_modules the parts where LoRA attention should be torched, causal_lm means model takes one one token and predict the next token, trainable_parameters tells how many parameters will be trained and how many will remain fixed 
+some calculations are done using gradient_checkpoint_enabling, and old tokens which have cache are basically closed coz it takes memory
+model is shown inputs and susbequent outputs for the same, not that is converted into chat format as we cannot just give model normal python list it requires special chat format. 
+prompt text - ques and input image format
+full text- ques and ans correct format
+processor now converts images into numbers so model gets it
+loss is calculated- input ids has tokens of both question and answers but we want model gets to learn how to write answers not like prediciting the question again, model**enc processes the input and calculates the loss, from loss the gradient is calculated which tells us in which direction should trainable parameters be changed
+now ofc after training the memory is cleaned
+
+so now time for actual training loop we show the model manga pages and make it learn
+random shuffles the order of examples, time for showing the training time , AdamW trains the parameters of the model , adapter_dir is where LoRa adapter gets saved, optimizer will update the parameters and weight_decay bascially stops the model to get real big
+
+training was made memory friendly by scaler , ACCUM and epochs
+gradient accumulation is like we check ans of 8 students we get their mistakes than after that we iprovize out teaching not like improving after every mistake but accumulating
+model predicts the answer, aur matching with correct ans loss is calculated
+loss is divided into 8 students
+if loss is invalid than skip the example
+and skipped variable tells us the count of how many examples were skipped
+
